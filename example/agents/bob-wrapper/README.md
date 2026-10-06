@@ -26,10 +26,10 @@ npm install
 
 The server is configured entirely through environment variables.
 
-| Variable | Required | Default | Description |
-|---|---|---|---|
-| `WORKSPACE_REPO` | **Yes** | — | Absolute path to the git repository BOB will work in. Worktrees are created inside it. |
-| `PORT` | No | `3001` | Port the HTTP server listens on. |
+| Variable         | Required | Default | Description                                                                            |
+| ---------------- | -------- | ------- | -------------------------------------------------------------------------------------- |
+| `WORKSPACE_REPO` | **Yes**  | —       | Absolute path to the git repository BOB will work in. Worktrees are created inside it. |
+| `PORT`           | No       | `3001`  | Port the HTTP server listens on.                                                       |
 
 ---
 
@@ -72,31 +72,31 @@ Content-Type: application/json
 
 ```json
 {
-  "message": "What does the orderSearch function do?",
-  "conversationId": "optional-on-turn-1",
-  "mode": "ask"
+	"message": "What does the orderSearch function do?",
+	"conversationId": "optional-on-turn-1",
+	"mode": "ask"
 }
 ```
 
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `message` | `string` | **Yes** | The user turn text. |
-| `conversationId` | `string` | No | Omit on turn 1. Pass the value returned by the previous response on turn 2+. |
-| `mode` | `"ask"` \| `"code"` \| `"plan"` \| `"advanced"` | No | BOB chat mode. Defaults to `ask`. Only applied on turn 1. |
+| Field            | Type                                            | Required | Description                                                                  |
+| ---------------- | ----------------------------------------------- | -------- | ---------------------------------------------------------------------------- |
+| `message`        | `string`                                        | **Yes**  | The user turn text.                                                          |
+| `conversationId` | `string`                                        | No       | Omit on turn 1. Pass the value returned by the previous response on turn 2+. |
+| `mode`           | `"ask"` \| `"code"` \| `"plan"` \| `"advanced"` | No       | BOB chat mode. Defaults to `ask`. Only applied on turn 1.                    |
 
 **Response**
 
 ```json
 {
-  "conversationId": "3f2a1b4c-...",
-  "content": "The orderSearch function queries the OMS API...",
-  "usage": {
-    "inputTokens": 1420,
-    "outputTokens": 312,
-    "totalTokens": 1732,
-    "cost": 0.0021,
-    "durationMs": 4381
-  }
+	"conversationId": "3f2a1b4c-...",
+	"content": "The orderSearch function queries the OMS API...",
+	"usage": {
+		"inputTokens": 1420,
+		"outputTokens": 312,
+		"totalTokens": 1732,
+		"cost": 0.0021,
+		"durationMs": 4381
+	}
 }
 ```
 
@@ -130,11 +130,11 @@ event: error
 data: {"message":"BOB exited with code 1..."}
 ```
 
-| Event | Payload | Description |
-|---|---|---|
-| `delta` | `{ content: string }` | Incremental text fragment from BOB. |
-| `done` | Full `ChatResponse` (same shape as JSON response) | Emitted once when BOB finishes. |
-| `error` | `{ message: string }` | Emitted if BOB fails to start or exits with an error. |
+| Event   | Payload                                           | Description                                           |
+| ------- | ------------------------------------------------- | ----------------------------------------------------- |
+| `delta` | `{ content: string }`                             | Incremental text fragment from BOB.                   |
+| `done`  | Full `ChatResponse` (same shape as JSON response) | Emitted once when BOB finishes.                       |
+| `error` | `{ message: string }`                             | Emitted if BOB fails to start or exits with an error. |
 
 ---
 
@@ -146,15 +146,15 @@ List all active conversations.
 
 ```json
 {
-  "conversations": [
-    {
-      "conversationId": "3f2a1b4c-...",
-      "sessionId": "bob-session-uuid",
-      "branch": "conv/3f2a1b4c-...",
-      "createdAt": "2024-01-15T10:30:00.000Z",
-      "mode": "ask"
-    }
-  ]
+	"conversations": [
+		{
+			"conversationId": "3f2a1b4c-...",
+			"sessionId": "bob-session-uuid",
+			"branch": "conv/3f2a1b4c-...",
+			"createdAt": "2024-01-15T10:30:00.000Z",
+			"mode": "ask"
+		}
+	]
 }
 ```
 
@@ -208,11 +208,11 @@ To use this API as an External Agent in IBM VIBE, configure the agent with:
 
 ```json
 {
-  "api_endpoint": "http://localhost:3001/api/v1/chat",
-  "http_method": "POST",
-  "request_template": "{\"message\":\"{{input}}\",\"conversationId\":\"{{conversationId}}\"}",
-  "response_mapping": "{\"output\":\"content\",\"variables\":{\"conversationId\":\"conversationId\"}}",
-  "token_mapping": "{\"input_tokens\":\"usage.inputTokens\",\"output_tokens\":\"usage.outputTokens\"}"
+	"api_endpoint": "http://localhost:3001/api/v1/chat",
+	"http_method": "POST",
+	"request_template": "{\"message\":\"{{input}}\",\"conversationId\":\"{{conversationId}}\"}",
+	"response_mapping": "{\"output\":\"content\",\"variables\":{\"conversationId\":\"conversationId\"}}",
+	"token_mapping": "{\"input_tokens\":\"usage.inputTokens\",\"output_tokens\":\"usage.outputTokens\"}"
 }
 ```
 
@@ -251,11 +251,11 @@ A `.bobapi.json` sidecar file in each worktree holds the mapping between the API
 
 ```json
 {
-  "conversationId": "3f2a1b4c-...",
-  "sessionId": "bob-internal-uuid",
-  "branch": "conv/3f2a1b4c-...",
-  "createdAt": "2024-01-15T10:30:00.000Z",
-  "mode": "ask"
+	"conversationId": "3f2a1b4c-...",
+	"sessionId": "bob-internal-uuid",
+	"branch": "conv/3f2a1b4c-...",
+	"createdAt": "2024-01-15T10:30:00.000Z",
+	"mode": "ask"
 }
 ```
 
